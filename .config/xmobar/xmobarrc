@@ -1,0 +1,55 @@
+Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true"
+       , additionalFonts = [ 
+           "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true",
+           "xft:Font Awesome 5 Free Solid:pixelsize=12",
+           "xft:Font Awesome 5 Brands:pixelsize=12"
+       ]
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "#282c34"
+       , fgColor = "#ff6c6b"
+       , alpha = 255
+       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "/home/opes/.config/xmobar/icons/"
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
+                                          "-L","18","-H","25",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","lightblue"] 36000
+                    , Run Network "eth0" ["-L","0","-H","32",
+                                          "--normal","green","--high","red"] 10
+                    , Run Network "eth1" ["-L","0","-H","32",
+                                          "--normal","green","--high","red"] 10
+                    , Run Cpu ["-L","3","-H","50",
+                               "--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    -- Battery information. This is likely to require some customization
+                    -- based upon your specific hardware. Or, for a desktop you may want
+                    -- to just remove this section entirely.
+                    , Run Battery [
+                            "-t", "<acstatus>: <left>% - <timeleft>",
+                            "--",
+                            --"-c", "charge_full",
+                            "-O", "AC",
+                            "-o", "Bat",
+                            "-h", "green",
+                            "-l", "red"
+                            ] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<icon=/home/opes/.config/xmobar/icons/haskell_20.xpm/>      \
+                    \ %cpu% | %memory% * %swap% | %eth0% - %eth1% | %battery% }\
+                    \{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
+       

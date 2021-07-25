@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=KeySwap
+Exec=xmodmap -e "keycode 66 = Escape" &&
+Terminal=false
+Type=Application

@@ -8,7 +8,7 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , border = TopB
        , bgColor = "#282c34"
        , fgColor = "#ff6c6b"
-       , alpha = 255
+       , alpha = 200
        , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
        , textOffset = -1
        , iconOffset = -1
@@ -19,12 +19,8 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , iconRoot = "/home/opes/.config/xmobar/icons/"
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
-                                          "-L","18","-H","25",
-                                          "--normal","green",
-                                          "--high","red",
-                                          "--low","lightblue"] 36000
-                    , Run Network "eth0" ["-L","0","-H","32",
+       , commands = [
+                    Run Network "eth0" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
                     , Run Network "eth1" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
@@ -51,5 +47,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , alignSep = "}{"
        , template = "<icon=/home/opes/.config/xmobar/icons/haskell_20.xpm/>      \
                     \ %cpu% | %memory% * %swap% | %eth0% - %eth1% | %battery% }\
-                    \{ <fc=#ee9a00>%date%</fc>| %EGPF% | %uname%"
+                    \{ <fc=#ee9a00>%date%</fc>|  %uname%"
        

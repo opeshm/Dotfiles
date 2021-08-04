@@ -79,6 +79,9 @@ myBorderWidth = 2
 myBrowser :: String
 myBrowser = "firefox "
 
+myFileManager :: String
+myFileManager = "nemo"
+
 myKeys :: [(String, X ())]
 myKeys =
     -- Xmonad
@@ -88,12 +91,21 @@ myKeys =
         
         , ("M-<Return>", spawn (myTerminal))
         , ("M-b", spawn (myBrowser ++ " gitlab.com/opeshm/"))
+        , ("M-f", spawn (myFileManager))
+    
+        -- Window resizing
+        , ("M-h", sendMessage Shrink)                   -- Shrink horiz window width
+        , ("M-l", sendMessage Expand)                   -- Expand horiz window width
+        , ("M-M1-j", sendMessage MirrorShrink)          -- Shrink vert window width
+        , ("M-M1-k", sendMessage MirrorExpand)          -- Expand vert window width
         ]
 
 myStartupHook :: X ()
 myStartupHook = do
+    spawnOnce "lxsession &"
     spawnOnce "picom &"
     spawnOnce "xmobar &"
+    spawnOnce "conky --config=/home/opes/.config/conky/xmonad.conkyrc &"
     spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
     setWMName "myWMName"
 
@@ -140,6 +152,7 @@ myManageHook = composeAll
      , className =? "pinentry-gtk-2"  --> doFloat
      , className =? "splash"          --> doFloat
      , className =? "toolbar"         --> doFloat
+     , className =? "file_properties" --> doFloat
      , title =? "Oracle VM VirtualBox Manager"  --> doFloat
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , isFullscreen -->  doFullFloat

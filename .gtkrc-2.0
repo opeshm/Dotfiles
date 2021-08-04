@@ -1,5 +1,5 @@
-gtk-icon-theme-name = "Adwaita"
-gtk-theme-name = "Adwaita"
+gtk-icon-theme-name = "McMuse"
+gtk-theme-name = "Adapta"
 gtk-font-name = "DejaVu Sans 11"
 gtk-application-prefer-dark-theme = true
 

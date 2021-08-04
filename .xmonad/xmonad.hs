@@ -82,6 +82,16 @@ myBrowser = "firefox "
 myFileManager :: String
 myFileManager = "nemo"
 
+myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
+-- myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
+
+clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
+
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+
 myKeys :: [(String, X ())]
 myKeys =
     -- Xmonad
@@ -159,6 +169,7 @@ myManageHook = composeAll
      ] <+> namedScratchpadManageHook myScratchPads
 
 main = do
+  xmproc0 <- spawnPipe "xmobar"
   xmonad $ ewmh def
     { manageHook         = myManageHook <+> manageDocks
     , handleEventHook    = docksEventHook
@@ -166,5 +177,19 @@ main = do
     , modMask            = myModMask
     , borderWidth        = myBorderWidth
     , startupHook        = myStartupHook
+    , workspaces         = myWorkspaces
+    , logHook = dynamicLogWithPP $ namedScratchpadFilterOutWorkspacePP $ xmobarPP
+        -- the following variables beginning with 'pp' are settings for xmobar.
+        { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
+        , ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]"           -- Current workspace
+        , ppVisible = xmobarColor "#98be65" "" . clickable              -- Visible but not current workspace
+        , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" "" . clickable -- Hidden workspaces
+        , ppHiddenNoWindows = xmobarColor "#c792ea" ""  . clickable     -- Hidden workspaces (no windows)
+        , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
+        , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
+        , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
+        , ppExtras  = [windowCount]                                     -- # of windows current workspace
+        , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
+        }
     } `additionalKeysP` myKeys
 

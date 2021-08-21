@@ -42,10 +42,11 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
                             ] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=/home/opes/.config/xmobar/icons/haskell_20.xpm/>      \
-                    \ %cpu% | %memory% * %swap% | %eth0% - %eth1% | %battery% }\
-                    \{ <fc=#ee9a00>%date%</fc>|  %uname%"
+       , template = "<icon=/home/opes/.config/xmobar/icons/haskell_20.xpm/> %UnsafeStdinReader% }{ \
+                    \ %cpu% | %memory% * %swap% | %eth0% - %eth1% | %battery% \
+                    \ <fc=#ee9a00>%date%</fc> | %uname%"
        

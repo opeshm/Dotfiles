@@ -16,37 +16,57 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , pickBroadest = False
        , persistent = False
        , hideOnStart = False
-       , iconRoot = "/home/opes/.config/xmobar/icons/"
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-                    Run Network "eth0" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Network "eth1" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Cpu ["-L","3","-H","50",
-                               "--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
-                    , Run Swap [] 10
-                    -- Battery information. This is likely to require some customization
-                    -- based upon your specific hardware. Or, for a desktop you may want
-                    -- to just remove this section entirely.
-                    , Run Battery [
-                            "-t", "<acstatus>: <left>% - <timeleft>",
-                            "--",
-                            --"-c", "charge_full",
-                            "-O", "AC",
-                            "-o", "Bat",
-                            "-h", "green",
-                            "-l", "red"
-                            ] 10
-                    , Run Com "uname" ["-s","-r"] "" 36000
+                    Run Network "wlan0" [
+                      "-t",       "<fn=2></fn> <rx>KB|<tx>KB", -- template modification 
+                      "-L",       "0",
+                      "-H",       "32",
+                      "--normal", "green",
+                      "--high",   "red"
+                    ] 10,
+
+                    Run Cpu [
+                      "-t",       "<fn=2></fn> <total>%", 
+                      "-L",       "0",
+                      "-H",       "80",
+                      "--normal", "green",
+                      "--high",   "red"
+                    ] 10,
+
+                    Run Memory [
+                      "-t",       "<fn=2></fn> <usedratio>%",
+                      "-L",       "0",
+                      "-H",       "80",
+                      "--normal", "green",
+                      "--high",   "red"
+                    ] 10,
+
+                    Run Swap [
+                      "-t",       "<fn=2></fn> <usedratio>%",
+                      "-L",       "0",
+                      "-H",       "1",
+                      "--normal", "green",
+                      "--high",   "red"
+                    ] 10,
+
+                    Run Battery [
+                      "-t",       "<fn=2></fn> <acstatus>: <left>%",
+                      "--",
+                      --"-c",     "charge_full",
+                      "-O",       "AC",
+                      "-o",       "Bat",
+                      "-h",       "green",
+                      "-l",       "red"
+                    ] 10
+
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "<icon=/home/opes/.config/xmobar/icons/haskell_20.xpm/> %UnsafeStdinReader% }{ \
-                    \ %cpu% | %memory% * %swap% | %eth0% - %eth1% | %battery% \
-                    \ <fc=#ee9a00>%date%</fc> | %uname%"
-       
+                    \ %cpu% | %memory% <fn=2></fn> %swap% | %wlan0% | %battery% \
+                    \ | <fc=#ee9a00>%date%</fc> "
+

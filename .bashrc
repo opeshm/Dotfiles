@@ -110,8 +110,6 @@ source "$BASH_IT"/bash_it.sh
 
 source ~/.bash-utils/bash-utils.sh
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
 export HISTSIZE=20000
 export HISTFILESIZE=20000
 export HISTCONTROL=ignoreboth:erasedups

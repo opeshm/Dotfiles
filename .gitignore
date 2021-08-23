@@ -3,6 +3,7 @@
 !README.md
 !.bashrc
 !.config/**
+.config/gtk-2.0/gtkfilechooser.ini
 !.SpaceVim.d
 !.tmux.conf
 !.xmonad

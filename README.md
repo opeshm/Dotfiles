@@ -11,3 +11,4 @@ Proyecto para la gestion de mis dotfiles.
 - [bash-it](https://github.com/Bash-it/bash-it.git)
 - [bash-utils](https://gitlab.com/opeshm/bash-utils)
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
+- [SpaceVim](https://spacevim.org/)

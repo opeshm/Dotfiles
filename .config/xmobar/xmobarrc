@@ -1,4 +1,4 @@
-Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true"
+Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true"
        , additionalFonts = [ 
            "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true",
            "xft:Font Awesome 5 Free Solid:pixelsize=12",
@@ -9,9 +9,8 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true
        , bgColor = "#282c34"
        , fgColor = "#ff6c6b"
        , alpha = 200
-       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 24 }
-       , textOffset = -1
-       , iconOffset = -1
+       , position = TopW L 100 
+       , textOffset = 14
        , lowerOnStart = True
        , pickBroadest = False
        , persistent = False

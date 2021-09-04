@@ -40,3 +40,4 @@ default_height = 30
 [[custom_plugins]]
   repo = "https://github.com/chrisbra/Colorizer"
   merged = false
+

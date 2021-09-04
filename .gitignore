@@ -2,8 +2,11 @@
 !.gitignore
 !README.md
 !.bashrc
-!.config/**
+!.config
+!.config/*
 .config/gtk-2.0/gtkfilechooser.ini
 !.SpaceVim.d
+!.SpaceVim.d/*
+.SpaceVim.d/.netrwhist
 !.tmux.conf
 !.xmonad

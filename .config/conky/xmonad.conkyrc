@@ -105,6 +105,7 @@ ${color1}${hr}${color}
 ${color1}[S]+[ENTER]${alignr}${color2}alacritty${color}
 ${color1}[S]+[b]${alignr}${color2}Web Browser${color}
 ${color1}[S]+[SHIFT]+[f]${alignr}${color2}nemo${color}
+${color1}[C-s]+[m]${alignr}${color2}ncspot${color}
 ${color1}${hr}${color}
 ${color1}[S]+[SHIFT]+r${alignr}${color2}restart xmonad${color}
 ${color1}[S]+[SHIFT]+q${alignr}${color2}quit xmonad${color}

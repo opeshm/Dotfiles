@@ -146,7 +146,7 @@ myAppGrid = [ ("Audacity", "audacity")
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
-                , NS "mocp" spawnMocp findMocp manageMocp
+                , NS "ncspot" spawnNCSpot findNCSpot manageNCSpot
                 , NS "calculator" spawnCalc findCalc manageCalc
                 ]
   where
@@ -158,9 +158,9 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
                  w = 0.9
                  t = 0.95 -h
                  l = 0.95 -w
-    spawnMocp  = myTerminal ++ " -t mocp -e mocp"
-    findMocp   = title =? "mocp"
-    manageMocp = customFloating $ W.RationalRect l t w h
+    spawnNCSpot  = myTerminal ++ " -o window.title=ncspot -e ncspot"
+    findNCSpot   = title =? "ncspot"
+    manageNCSpot = customFloating $ W.RationalRect l t w h
                where
                  h = 0.9
                  w = 0.9
@@ -402,7 +402,7 @@ myKeys =
     -- When you toggle them to show, it brings them to your current workspace.
     -- Toggle them to hide and it sends them back to hidden workspace (NSP).
         , ("C-s t", namedScratchpadAction myScratchPads "terminal")
-        , ("C-s m", namedScratchpadAction myScratchPads "mocp")
+        , ("C-s m", namedScratchpadAction myScratchPads "ncspot")
         , ("C-s c", namedScratchpadAction myScratchPads "calculator")
 
     -- Multimedia Keys

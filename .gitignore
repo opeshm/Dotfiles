@@ -1,12 +1,24 @@
+# Ignore ALL
 *
+
+# NOT ignore project files
 !.gitignore
 !README.md
+
+# NOT ignore dotfiles in home path 
 !.bashrc
+!.tmux.conf
+
+# NOT ignore .xmonad path
+!.xmonad
+
+# NOT ignore .config folder
 !.config
 !.config/*
 .config/gtk-2.0/gtkfilechooser.ini
+
+# NOT ignore SpaceVim customizations
 !.SpaceVim.d
 !.SpaceVim.d/*
 .SpaceVim.d/.netrwhist
-!.tmux.conf
-!.xmonad
+

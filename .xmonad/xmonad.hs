@@ -290,7 +290,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| tallAccordion
                                  ||| wideAccordion
 
-myWorkspaces = [" terms ", " www ", " misc1 ", " misc2 ", " misc3 ", " misc4 ", " misc5 ", " misc6 ", " misc7 "]
+myWorkspaces = [" terms ", " www ", " chats ", " mail ", " vbox ", " remotes ", " misc7 ", " misc8 ", " vpns "]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"

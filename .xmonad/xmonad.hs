@@ -67,7 +67,10 @@ import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
 myFont :: String
-myFont = "xft:SauceCodePro Nerd Font Mono:regular:size=9:antialias=true:hinting=true"
+myFont = "xft:SauceCodePro Nerd Font Mono:regular:size=10:antialias=true:hinting=true"
+
+myGridConfigFont :: String
+myGridConfigFont = "xft:ShureTechMono Nerd Font:type=Regular:size=16:antialias=true:hinting=true"
 
 myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super/windows key
@@ -110,6 +113,7 @@ myColorizer = colorRangeFromClassName
                   (0x28,0x2c,0x34) -- active fg
 
 -- gridSelect menu layout
+
 mygridConfig :: p -> GSConfig Window
 mygridConfig colorizer = (buildDefaultGSConfig myColorizer)
     { gs_cellheight   = 40
@@ -128,20 +132,17 @@ spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
                    , gs_cellpadding  = 6
                    , gs_originFractX = 0.5
                    , gs_originFractY = 0.5
-                   , gs_font         = myFont
+                   , gs_font         = myGridConfigFont
                    }
 
-myAppGrid = [ ("Audacity", "audacity")
-                 , ("Emacs", "emacsclient -c -a emacs")
+myAppGrid = [ ("Enpass", "enpass")
+                 , ("Rambox", "rambos")
+                 , ("MS Teams", "teams")
+                 , ("Thunderbird", "thunderbird")
+                 , ("Brave", "brave")
                  , ("Firefox", "firefox")
-                 , ("Geany", "geany")
-                 , ("Geary", "geary")
-                 , ("Gimp", "gimp")
-                 , ("Kdenlive", "kdenlive")
-                 , ("LibreOffice Impress", "loimpress")
+                 , ("Vivaldi", "vivaldi")
                  , ("LibreOffice Writer", "lowriter")
-                 , ("OBS", "obs")
-                 , ("PCManFM", "pcmanfm")
                  ]
 
 myScratchPads :: [NamedScratchpad]

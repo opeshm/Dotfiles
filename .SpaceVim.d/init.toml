@@ -45,3 +45,6 @@ default_height = 30
   repo = "Shougo/vimproc.vim"
   merged = false
 
+[[custom_plugins]]
+  repo = "https://github.com/PProvost/vim-ps1"
+  merged = false

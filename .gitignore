@@ -12,15 +12,6 @@
 # NOT ignore .xmonad path
 !.xmonad
 
-# NOT ignore .config folder
-!.config
-!.config/*
-## Remove from source control some paths
-.config/gtk-2.0/gtkfilechooser.ini
-.config/mimeapps.list
-.config/nvim
-.config/pavucontrol.ini
-
 # NOT ignore SpaceVim customizations
 !.SpaceVim.d
 !.SpaceVim.d/*

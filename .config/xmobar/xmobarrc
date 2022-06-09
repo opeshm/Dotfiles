@@ -4,13 +4,13 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true
            "xft:Font Awesome 6 Free Solid:pixelsize=12",
            "xft:Font Awesome 6 Brands:pixelsize=12"
        ]
-       , borderColor = "black"
+       , borderColor = "#282c34"
        , border = TopB
        , bgColor = "#282c34"
-       , fgColor = "#ff6c6b"
-       , alpha = 200
+       , fgColor = "#83ff08"
+       , alpha = 180
        , position = TopW L 100 
-       , textOffset = 14
+       , textOffset = 16
        , lowerOnStart = True
        , pickBroadest = False
        , persistent = False
@@ -18,54 +18,59 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-                    Run Network "wlan0" [
-                      "-t",       "<fn=2></fn> <rx>KB|<tx>KB", -- template modification 
-                      "-L",       "0",
-                      "-H",       "32",
-                      "--normal", "green",
-                      "--high",   "red"
-                    ] 10,
+            Run Kbd [
+              ("es", "<fc=#0883ff>ES</fc>"),
+              ("us", "<fc=#0883ff>US</fc>")
+            ],
+            Run Network "wlo1" [
+              "-t",       "<fc=#0883ff><fn=2></fn></fc> <fn=2></fn> <rx>KB <fn=2></fn> <tx>KB", -- template modification 
+              "-L",       "0",
+              "-H",       "32",
+              "--normal", "green",
+              "--high",   "red"
+            ] 10,
 
-                    Run Cpu [
-                      "-t",       "<fn=2></fn> <total>%", 
-                      "-L",       "0",
-                      "-H",       "80",
-                      "--normal", "green",
-                      "--high",   "red"
-                    ] 10,
+            Run Cpu [
+              "-t",       "<fc=#0883ff><fn=2></fn></fc> <total>%", 
+              "-L",       "0",
+              "-H",       "80",
+              "--normal", "green",
+              "--high",   "red"
+            ] 10,
 
-                    Run Memory [
-                      "-t",       "<fn=2></fn> <usedratio>%",
-                      "-L",       "0",
-                      "-H",       "80",
-                      "--normal", "green",
-                      "--high",   "red"
-                    ] 10,
+            Run Memory [
+              "-t",       "<fc=#0883ff><fn=2></fn></fc> <usedratio>%",
+              "-L",       "0",
+              "-H",       "80",
+              "--normal", "green",
+              "--high",   "red"
+            ] 10,
 
-                    Run Swap [
-                      "-t",       "<fn=2></fn> <usedratio>%",
-                      "-L",       "0",
-                      "-H",       "1",
-                      "--normal", "green",
-                      "--high",   "red"
-                    ] 10,
+            Run Swap [
+              "-t",       "<fc=#0883ff><fn=2></fn></fc> <usedratio>%",
+              "-L",       "0",
+              "-H",       "1",
+              "--normal", "green",
+              "--high",   "red"
+            ] 10,
 
-                    Run Battery [
-                      "-t",       "<fn=2></fn> <acstatus>: <left>%",
-                      "--",
-                      --"-c",     "charge_full",
-                      "-O",       "AC",
-                      "-o",       "Bat",
-                      "-h",       "green",
-                      "-l",       "red"
-                    ] 10
-
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    , Run UnsafeStdinReader
-                    ]
+            Run Battery [
+              "-t",       "<fc=#0883ff><fn=2></fn></fc> <acstatus>: <left>%",
+              "--",
+              --"-c",     "charge_full",
+              "-O",       "AC",
+              "-o",       "Bat",
+              "-h",       "green",
+              "-l",       "red"
+            ] 10,
+            Run Date "%a %b %_d %Y %H:%M:%S" "date" 10,
+            Run UnsafeStdinReader
+            ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=/home/opes/.config/xmobar/icons/haskell_20.xpm/> %UnsafeStdinReader% }{ \
-                    \ %cpu% | %memory% <fn=2></fn> %swap% | %wlan0% | %battery% \
-                    \ | <fc=#ee9a00>%date%</fc> "
+       , template = "<icon=/home/opes/.config/xmobar/icons/haskell_20.xpm/> \
+               \ %UnsafeStdinReader% }{ \
+               \ %cpu% | %memory% <fn=2></fn> %swap% | %wlo1% | %battery% \
+               \ | <fc=#ee9a00>%date%</fc> \
+               \ | %kbd%"
 

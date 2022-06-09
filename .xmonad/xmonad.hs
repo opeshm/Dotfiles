@@ -1,3 +1,6 @@
+-- This file "is inspired" by git clone https://gitlab.com/dwt1/dotfiles.git
+-- Please, visit Derek's dotfile reposotory
+
 -- Base
 import XMonad
 import System.Directory
@@ -66,11 +69,11 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (runProcessWithInput, safeSpawn, spawnPipe)
 import XMonad.Util.SpawnOnce
 
+-- Import ColorSchema
+import Colors.Aci
+
 myFont :: String
 myFont = "xft:SauceCodePro Nerd Font Mono:regular:size=10:antialias=true:hinting=true"
-
-myGridConfigFont :: String
-myGridConfigFont = "xft:ShureTechMono Nerd Font:type=Regular:size=16:antialias=true:hinting=true"
 
 myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super/windows key
@@ -79,7 +82,7 @@ myTerminal :: String
 myTerminal = "alacritty"    -- Sets default terminal
 
 myBrowser :: String
-myBrowser = "brave "  -- Sets qutebrowser as browser
+myBrowser = "firefox "  -- Sets qutebrowser as browser
 
 myFileExplorer :: String
 myFileExplorer = "nemo"
@@ -87,63 +90,27 @@ myFileExplorer = "nemo"
 myBorderWidth :: Dimension
 myBorderWidth = 2           -- Sets border width for windows
 
-myNormColor :: String
-myNormColor   = "#282c34"   -- Border color of normal windows
-
-myFocusColor :: String
-myFocusColor  = "#46d9ff"   -- Border color of focused windows
-
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "lxsession &"
-    spawnOnce "picom &"
+    spawn "killall conky"   -- kill current conky on each restart
+    -- TODO: implement trayer
+    -- spawn "killall trayer"  -- kill current trayer on each restart
+
+    spawnOnce "lxsession"
+    spawnOnce "picom"
+    spawnOnce "nm-applet"
+    spawnOnce "volumeicon"
+    -- TODO: implement conky colors
+    -- spawn ("sleep 2 && conky -c $HOME/.config/conky/xmonad/" ++ colorScheme ++ "-01.conkyrc")
     spawnOnce "conky -c $HOME/.config/conky/xmonad.conkyrc"
-    spawnOnce "nitrogen --restore &"
+    -- TODO: implement trayer
+    -- spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
+
+    spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
     setWMName "LG3D"
-
-myColorizer :: Window -> Bool -> X (String, String)
-myColorizer = colorRangeFromClassName
-                  (0x28,0x2c,0x34) -- lowest inactive bg
-                  (0x28,0x2c,0x34) -- highest inactive bg
-                  (0xc7,0x92,0xea) -- active bg
-                  (0xc0,0xa7,0x9a) -- inactive fg
-                  (0x28,0x2c,0x34) -- active fg
-
--- gridSelect menu layout
-
-mygridConfig :: p -> GSConfig Window
-mygridConfig colorizer = (buildDefaultGSConfig myColorizer)
-    { gs_cellheight   = 40
-    , gs_cellwidth    = 200
-    , gs_cellpadding  = 6
-    , gs_originFractX = 0.5
-    , gs_originFractY = 0.5
-    , gs_font         = myFont
-    }
-
-spawnSelected' :: [(String, String)] -> X ()
-spawnSelected' lst = gridselect conf lst >>= flip whenJust spawn
-    where conf = def
-                   { gs_cellheight   = 40
-                   , gs_cellwidth    = 200
-                   , gs_cellpadding  = 6
-                   , gs_originFractX = 0.5
-                   , gs_originFractY = 0.5
-                   , gs_font         = myGridConfigFont
-                   }
-
-myAppGrid = [ ("Enpass", "enpass")
-                 , ("Rambox", "rambos")
-                 , ("MS Teams", "teams")
-                 , ("Thunderbird", "thunderbird")
-                 , ("Brave", "brave")
-                 , ("Firefox", "firefox")
-                 , ("Vivaldi", "vivaldi")
-                 , ("LibreOffice Writer", "lowriter")
-                 ]
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm
@@ -193,8 +160,8 @@ tall     = renamed [Replace "tall"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
-           $ limitWindows 12
-           $ mySpacing 8
+           $ limitWindows 6
+           $ mySpacing 4
            $ ResizableTall 1 (3/100) (1/2) []
 magnify  = renamed [Replace "magnify"]
            $ smartBorders
@@ -202,8 +169,8 @@ magnify  = renamed [Replace "magnify"]
            $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
            $ magnifier
-           $ limitWindows 12
-           $ mySpacing 8
+           $ limitWindows 6
+           $ mySpacing 4
            $ ResizableTall 1 (3/100) (1/2) []
 monocle  = renamed [Replace "monocle"]
            $ smartBorders
@@ -219,8 +186,8 @@ grid     = renamed [Replace "grid"]
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
            $ subLayout [] (smartBorders Simplest)
-           $ limitWindows 12
-           $ mySpacing 8
+           $ limitWindows 6
+           $ mySpacing 4
            $ mkToggle (single MIRROR)
            $ Grid (16/10)
 spirals  = renamed [Replace "spirals"]
@@ -291,7 +258,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| tallAccordion
                                  ||| wideAccordion
 
-myWorkspaces = [" terms ", " www ", " chats ", " mail ", " vbox ", " remotes ", " misc7 ", " misc8 ", " vpns "]
+myWorkspaces = [" tty ", " www ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -327,22 +294,19 @@ myKeys =
         , ("M-S-q", io exitSuccess)              -- Quits xmonad
 
     -- Run Prompt
-        , ("M-S-<Return>", spawn "dmenu_run -i -p \"Run: \"") -- Dmenu
+        , ("M-S-<Return>", spawn "rofi -show run") -- Rofi
 
     -- Useful programs to have a keybinding for launch
         , ("M-<Return>", spawn (myTerminal))
         , ("M-b", spawn (myBrowser))
         , ("M-S-f", spawn (myFileExplorer))
 
+    -- Custom scripts
+        , ("M-S-u", spawn ("${HOME}/.xmonad/scripts/switch-kb-layout.sh"))
+
     -- Kill windows
         , ("M-S-c", kill1)     -- Kill the currently focused client
         , ("M-S-a", killAll)   -- Kill all windows on current workspace
-
-    -- Workspaces
-        , ("M-.", nextScreen)  -- Switch focus to next monitor
-        , ("M-,", prevScreen)  -- Switch focus to prev monitor
-        , ("M-S-<KP_Add>", shiftTo Next nonNSP >> moveTo Next nonNSP)       -- Shifts focused window to next ws
-        , ("M-S-<KP_Subtract>", shiftTo Prev nonNSP >> moveTo Prev nonNSP)  -- Shifts focused window to prev ws
 
     -- Floating windows
         , ("M-f", sendMessage (T.Toggle "floats")) -- Toggles my 'floats' layout
@@ -354,11 +318,6 @@ myKeys =
         , ("C-M1-k", incWindowSpacing 4)         -- Increase window spacing
         , ("C-M1-h", decScreenSpacing 4)         -- Decrease screen spacing
         , ("C-M1-l", incScreenSpacing 4)         -- Increase screen spacing
-
-    -- Grid Select (CTR-g followed by a key)
-        , ("C-g g", spawnSelected' myAppGrid)                 -- grid select favorite apps
-        , ("C-g t", goToSelected $ mygridConfig myColorizer)  -- goto selected window
-        , ("C-g b", bringSelected $ mygridConfig myColorizer) -- bring selected window
 
     -- Windows navigation
         , ("M-m", windows W.focusMaster)  -- Move focus to the master window
@@ -408,6 +367,8 @@ myKeys =
         , ("C-s c", namedScratchpadAction myScratchPads "calculator")
 
     -- Multimedia Keys
+        , ("<XF86MonBrightnessUp>", spawn "lux -a 5%")    
+        , ("<XF86MonBrightnessDown>", spawn "lux -s 5%")   
         , ("<XF86AudioPlay>", spawn (myTerminal ++ "mocp --play"))
         , ("<XF86AudioPrev>", spawn (myTerminal ++ "mocp --previous"))
         , ("<XF86AudioNext>", spawn (myTerminal ++ "mocp --next"))
@@ -444,19 +405,32 @@ main = do
         , layoutHook         = showWName' myShowWNameTheme $ myLayoutHook
         , workspaces         = myWorkspaces
         , borderWidth        = myBorderWidth
-        , normalBorderColor  = myNormColor
-        , focusedBorderColor = myFocusColor
+        , normalBorderColor  = color02
+        , focusedBorderColor = color03
         , logHook = dynamicLogWithPP $ namedScratchpadFilterOutWorkspacePP $ xmobarPP
-              -- the following variables beginning with 'pp' are settings for xmobar.
-              { ppOutput = \x -> hPutStrLn xmproc0 x                          -- xmobar on monitor 1
-              , ppCurrent = xmobarColor "#98be65" "" . wrap "[" "]"           -- Current workspace
-              , ppVisible = xmobarColor "#98be65" "" . clickable              -- Visible but not current workspace
-              , ppHidden = xmobarColor "#82AAFF" "" . wrap "*" "" . clickable -- Hidden workspaces
-              , ppHiddenNoWindows = xmobarColor "#c792ea" ""  . clickable     -- Hidden workspaces (no windows)
-              , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
-              , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
-              , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
-              , ppExtras  = [windowCount]                                     -- # of windows current workspace
-              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
-              }
+            -- the following variables beginning with 'pp' are settings for xmobar.
+            { 
+              -- xmobar on monitor 1
+                ppOutput = \x -> hPutStrLn xmproc0 x                          
+              -- Current workspace
+              , ppCurrent = xmobarColor color03 "" . wrap
+                ("<box type=Bottom width=2 mb=2 color=" ++ color03 ++ ">") "</box>"
+              -- Visible but not current workspace
+              , ppVisible = xmobarColor color02 "" . clickable
+              -- Hidden workspaces
+              , ppHidden = xmobarColor color05 "" . wrap 
+                ("<box type=Top width=2 mb=2 color=" ++ color05 ++ ">") "</box>". clickable
+              -- Hidden workspaces (no windows)
+              , ppHiddenNoWindows = xmobarColor color14 ""  . clickable
+              -- Title of active window
+              , ppTitle = xmobarColor color03 "" . shorten 60
+              -- Separator character
+              , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"
+              -- Urgent workspace
+              , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
+              -- # of windows current workspace
+              , ppExtras  = [windowCount]
+              -- order of things in xmobar
+              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+            }
         } `additionalKeysP` myKeys

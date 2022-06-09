@@ -10,7 +10,8 @@
 !.tmux.conf
 
 # NOT ignore .xmonad path
-!.xmonad
+!.xmonad/xmonad.hs
+!.xmonad/scripts/*
 
 # NOT ignore SpaceVim customizations
 !.SpaceVim.d

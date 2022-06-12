@@ -97,7 +97,7 @@ myStartupHook :: X ()
 myStartupHook = do
     spawn "killall conky"   -- kill current conky on each restart
     -- TODO: implement trayer
-    -- spawn "killall trayer"  -- kill current trayer on each restart
+    spawn "killall trayer"  -- kill current trayer on each restart
 
     spawnOnce "lxsession"
     spawnOnce "picom"
@@ -107,7 +107,7 @@ myStartupHook = do
     -- spawn ("sleep 2 && conky -c $HOME/.config/conky/xmonad/" ++ colorScheme ++ "-01.conkyrc")
     spawnOnce "conky -c $HOME/.config/conky/xmonad.conkyrc"
     -- TODO: implement trayer
-    -- spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
+    spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
 
     spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
     setWMName "LG3D"

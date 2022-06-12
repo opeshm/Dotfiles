@@ -64,6 +64,8 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true
               "-l",       "red"
             ] 10,
             Run Date "%a %b %_d %Y %H:%M:%S" "date" 10,
+            -- Script that dynamically adjusts xmobar padding depending on number of trayer icons.
+            Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20,
             Run UnsafeStdinReader
             ]
        , sepChar = "%"
@@ -72,5 +74,6 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true
                \ %UnsafeStdinReader% }{ \
                \ %cpu% | %memory% <fn=2></fn> %swap% | %wlo1% | %battery% \
                \ | <fc=#ee9a00>%date%</fc> \
-               \ | %kbd%"
+               \ | %kbd% \
+               \ %trayerpad%"
 

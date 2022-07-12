@@ -30,11 +30,12 @@ import qualified Data.Map as M
 -- Hooks
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 import XMonad.Hooks.EwmhDesktops  -- for some fullscreen events, also for xcomposite in obs.
-import XMonad.Hooks.ManageDocks (avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
+import XMonad.Hooks.ManageDocks (docks, avoidStruts, docksEventHook, manageDocks, ToggleStruts(..))
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
 import XMonad.Hooks.ServerMode
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.WorkspaceHistory
+import XMonad.Hooks.StatusBar.PP
 
 -- Layouts
 import XMonad.Layout.Accordion
@@ -109,7 +110,7 @@ myStartupHook = do
     -- TODO: implement trayer
     spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
 
-    spawnOnce "nitrogen --restore &"   -- if you prefer nitrogen to feh
+    spawnOnce "nitrogen --restore &"
     setWMName "LG3D"
 
 myScratchPads :: [NamedScratchpad]
@@ -163,7 +164,7 @@ tall     = renamed [Replace "tall"]
            $ limitWindows 6
            $ mySpacing 4
            $ ResizableTall 1 (3/100) (1/2) []
-magnify  = renamed [Replace "magnify"]
+magnifyCustom = renamed [Replace "magnify"]
            $ smartBorders
            $ windowNavigation
            $ addTabs shrinkText myTabTheme
@@ -247,7 +248,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
              where
                myDefaultLayout =     withBorder myBorderWidth tall
-                                 ||| magnify
+                                 ||| magnifyCustom
                                  ||| noBorders monocle
                                  ||| floats
                                  ||| noBorders tabs
@@ -388,17 +389,9 @@ myKeys =
 
 main :: IO ()
 main = do
-    -- Launching three instances of xmobar on their monitors.
     xmproc0 <- spawnPipe "xmobar"
-    -- the xmonad, ya know...what the WM is named after!
-    xmonad $ ewmh def
+    xmonad $ docks $ ewmh def
         { manageHook         = myManageHook <+> manageDocks
-        , handleEventHook    = docksEventHook
-                               -- Uncomment this line to enable fullscreen support on things like YouTube/Netflix.
-                               -- This works perfect on SINGLE monitor systems. On multi-monitor systems,
-                               -- it adds a border around the window if screen does not have focus. So, my solution
-                               -- is to use a keybinding to toggle fullscreen noborders instead.  (M-<Space>)
-                               -- <+> fullscreenEventHook
         , modMask            = myModMask
         , terminal           = myTerminal
         , startupHook        = myStartupHook
@@ -407,30 +400,20 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = color02
         , focusedBorderColor = color03
-        , logHook = dynamicLogWithPP $ namedScratchpadFilterOutWorkspacePP $ xmobarPP
+        , logHook = dynamicLogWithPP $ filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP
             -- the following variables beginning with 'pp' are settings for xmobar.
             { 
-              -- xmobar on monitor 1
                 ppOutput = \x -> hPutStrLn xmproc0 x                          
-              -- Current workspace
               , ppCurrent = xmobarColor color03 "" . wrap
                 ("<box type=Bottom width=2 mb=2 color=" ++ color03 ++ ">") "</box>"
-              -- Visible but not current workspace
               , ppVisible = xmobarColor color02 "" . clickable
-              -- Hidden workspaces
               , ppHidden = xmobarColor color05 "" . wrap 
                 ("<box type=Top width=2 mb=2 color=" ++ color05 ++ ">") "</box>". clickable
-              -- Hidden workspaces (no windows)
               , ppHiddenNoWindows = xmobarColor color14 ""  . clickable
-              -- Title of active window
               , ppTitle = xmobarColor color03 "" . shorten 60
-              -- Separator character
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"
-              -- Urgent workspace
               , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
-              -- # of windows current workspace
               , ppExtras  = [windowCount]
-              -- order of things in xmobar
               , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
             }
         } `additionalKeysP` myKeys

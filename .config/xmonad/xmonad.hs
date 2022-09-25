@@ -97,19 +97,16 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myStartupHook :: X ()
 myStartupHook = do
     spawn "killall conky"   -- kill current conky on each restart
-    -- TODO: implement trayer
     spawn "killall trayer"  -- kill current trayer on each restart
 
     spawnOnce "lxsession"
     spawnOnce "picom"
     spawnOnce "nm-applet"
     spawnOnce "volumeicon"
-    -- TODO: implement conky colors
-    -- spawn ("sleep 2 && conky -c $HOME/.config/conky/xmonad/" ++ colorScheme ++ "-01.conkyrc")
     spawnOnce "conky -c $HOME/.config/conky/xmonad.conkyrc"
-    -- TODO: implement trayer
     spawn ("sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 " ++ colorTrayer ++ " --height 22")
 
+    spawnOnce "/home/opes/.screenlayout/single.sh &"
     spawnOnce "nitrogen --restore &"
     setWMName "LG3D"
 
@@ -259,7 +256,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| tallAccordion
                                  ||| wideAccordion
 
-myWorkspaces = [" tty ", " www ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
+myWorkspaces = [" tty ", " www ", " gaming ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " vm "]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -282,9 +279,15 @@ myManageHook = composeAll
      , className =? "splash"          --> doFloat
      , className =? "toolbar"         --> doFloat
      , className =? "Shutter"         --> doFloat
-     , title =? "Oracle VM VirtualBox Manager"  --> doFloat
+     , className =? "Pavucontrol"     --> doFloat
+     , title     =? "Oracle VM VirtualBox Manager"  --> doFloat
      , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
-     , isFullscreen -->  doFullFloat
+     , isFullscreen                -->  doFullFloat
+     , className =? "firefox"                       --> doShift (myWorkspaces !! 1)
+     , className =? "Lutris"                        --> doShift (myWorkspaces !! 2)
+     , className =? "Steam"                         --> doShift (myWorkspaces !! 2)
+     , title     =? "Oracle VM VirtualBox Manager"  --> doShift (myWorkspaces !! 8)
+     , className =? "Virt-manager"                  --> doShift (myWorkspaces !! 8)
      ] <+> namedScratchpadManageHook myScratchPads
 
 myKeys :: [(String, X ())]

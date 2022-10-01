@@ -301,10 +301,10 @@ main = do
             { 
                 ppOutput = \x -> hPutStrLn xmproc0 x                          
               , ppCurrent = xmobarColor color03 "" . wrap
-                ("<box type=Bottom width=2 mb=2 color=" ++ color03 ++ ">") "</box>"
+                ("<box type=Bottom width=2 mb=0 color=" ++ color03 ++ ">") "</box>"
               , ppVisible = xmobarColor color02 "" . clickable
               , ppHidden = xmobarColor color05 "" . wrap 
-                ("<box type=Top width=2 mb=2 color=" ++ color05 ++ ">") "</box>". clickable
+                ("<box type=Top width=2 mb=0 color=" ++ color05 ++ ">") "</box>". clickable
               , ppHiddenNoWindows = xmobarColor color14 ""  . clickable
               , ppTitle = xmobarColor color03 "" . shorten 60
               , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"

@@ -7,12 +7,12 @@ case $- in
 esac
 
 # Path to the bash it configuration
-export BASH_IT="/home/opes/.config/bash-it"
+export BASH_IT="/home/opes/.config/bash_it"
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-export BASH_IT_THEME='bobby'
+# export BASH_IT_THEME='bobby'
 export BASH_IT_THEME='powerline-multiline'
 
 # Some themes can show whether `sudo` has a current token or not.
@@ -84,6 +84,6 @@ export SCM_CHECK=true
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
 
-BASH_UTILS=/home/opes/.config/bash-utils
+export BASH_UTILS=/home/opes/.config/bash-utils
 
 source $BASH_UTILS/bash-utils.sh

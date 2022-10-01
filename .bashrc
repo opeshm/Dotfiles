@@ -1,36 +1,4 @@
-# .bashrc
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
-# User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-fi
-export PATH
-
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
-# User specific aliases and functions
-if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
-	done
-fi
-
-unset rc
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+#!/usr/bin/env bash
 
 # If not running interactively, don't do anything
 case $- in
@@ -39,12 +7,17 @@ case $- in
 esac
 
 # Path to the bash it configuration
-export BASH_IT="/home/opes/.bash_it"
+export BASH_IT="/home/opes/.config/bash-it"
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-export BASH_IT_THEME='powerline'
+export BASH_IT_THEME='bobby'
+export BASH_IT_THEME='powerline-multiline'
+
+# Some themes can show whether `sudo` has a current token or not.
+# Set `$THEME_CHECK_SUDO` to `true` to check every prompt:
+#THEME_CHECK_SUDO='true'
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
@@ -65,6 +38,9 @@ export IRC_CLIENT='irssi'
 
 # Set this to the command you use for todo.txt-cli
 export TODO="t"
+
+# Set this to the location of your work or project folders
+#BASH_IT_PROJECT_PATHS="${HOME}/Projects:/Volumes/work/src"
 
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true
@@ -108,9 +84,6 @@ export SCM_CHECK=true
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
 
-source ~/.bash-utils/bash-utils.sh
+BASH_UTILS=/home/opes/.config/bash-utils
 
-export HISTSIZE=20000
-export HISTFILESIZE=20000
-export HISTCONTROL=ignoreboth:erasedups
-
+source $BASH_UTILS/bash-utils.sh

@@ -74,5 +74,5 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true
                \ %UnsafeStdinReader% }{ \
                \ %cpu% | %memory% <fn=2></fn> %swap% | %wlo1% | %battery% \
                \ | <fc=#ee9a00>%date%</fc> \
-               \ | %kbd% "
+               \ | %kbd%                           "
 

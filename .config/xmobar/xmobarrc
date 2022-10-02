@@ -20,8 +20,8 @@ Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true
        , overrideRedirect = True
        , commands = [
             Run Kbd [
-              ("es", "<fc=#0883ff>ES</fc>"),
-              ("us", "<fc=#0883ff>US</fc>")
+              ("es", "<action=/home/opes/.config/xmonad/scripts/switch-kb-layout.sh><fc=#0883ff>ES</fc></action>"),
+              ("us", "<action=/home/opes/.config/xmonad/scripts/switch-kb-layout.sh><fc=#0883ff>US</fc></action>")
             ],
             Run Network "wlo1" [
               "-t",       "<fc=#0883ff><fn=2></fn></fc> <fn=2></fn> <rx>KB <fn=2></fn> <tx>KB", -- template modification 

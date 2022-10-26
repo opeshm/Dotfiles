@@ -1,0 +1,11 @@
+vim.cmd("let g:airline#extensions#neomake#enabled = 1")
+vim.cmd("let g:airline#extensions#tabline#enabled = 1")
+vim.cmd("let g:airline#extensions#tabline#formatter = 'unique_tail'")
+vim.cmd("let g:airline#extensions#tabline#show_buffers = 1") 
+vim.cmd("let g:airline#extensions#tabline#show_splits = 1") 
+vim.cmd("let g:airline#extensions#tabline#switch_buffers_and_tabs = 1")
+vim.cmd("let g:airline#extensions#tabline#tab_nr_type = 1") 
+vim.cmd("let g:airline#extensions#tagbar#enabled = 0")
+vim.cmd("let g:airline#extensions#tmuxline#enabled = 0")
+vim.cmd("let g:airline_section_z = airline#section#create(['%l/%c'])")
+

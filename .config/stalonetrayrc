@@ -94,6 +94,7 @@ scrollbars none
 
 # slot_size <int>            # specifies size of icon slot, defaults to
                              # icon_size NEW in @VERSION_STR@.
+slot_size 20
 
 # skip_taskbar [<bool>]      # hide tray`s window from the taskbar
 skip_taskbar true

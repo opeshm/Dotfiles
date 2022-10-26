@@ -12,7 +12,6 @@ export BASH_IT="/home/opes/.config/bash_it"
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-# export BASH_IT_THEME='bobby'
 export BASH_IT_THEME='powerline-multiline'
 
 # Some themes can show whether `sudo` has a current token or not.
@@ -87,3 +86,8 @@ source "$BASH_IT"/bash_it.sh
 export BASH_UTILS=/home/opes/.config/bash-utils
 
 source $BASH_UTILS/bash-utils.sh
+
+# BEGIN SNIPPET: Platform.sh CLI configuration
+HOME=${HOME:-'/home/opes'}
+export PATH="$HOME/"'.platformsh/bin':"$PATH"
+if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET

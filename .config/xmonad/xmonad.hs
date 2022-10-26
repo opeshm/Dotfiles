@@ -203,7 +203,10 @@ myShowWNameTheme = def
     }
 
 -- The layout hook
-myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts floats
+myLayoutHook = avoidStruts 
+               $ mouseResize 
+               $ windowArrange 
+               $ T.toggleLayouts floats
                $ mkToggle (NBFULL ?? NOBORDERS ?? EOT) myDefaultLayout
              where
                myDefaultLayout =     withBorder myBorderWidth tall
@@ -214,7 +217,7 @@ myLayoutHook = avoidStruts $ mouseResize $ windowArrange $ T.toggleLayouts float
                                  ||| spirals
                                  ||| threeCol
 
-myWorkspaces = [" tty ", " www ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
+myWorkspaces = [" tty ", " www ", " gaming ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -259,6 +262,10 @@ myKeys =
 
     -- Custom scripts
         , ("M-S-u", spawn ("${HOME}/.config/xmonad/scripts/switch-kb-layout.sh"))
+
+    -- Workspaces navigation
+        , ("M-<Tab>", sendMessage NextLayout)
+        , ("M-<Space>", sendMessage (MT.Toggle NBFULL) >> sendMessage ToggleStruts)
 
     -- Floating windows
         , ("M-f", sendMessage (T.Toggle "floats")) -- Toggles my 'floats' layout

@@ -31,6 +31,16 @@ return require('packer').startup(function(use)
   }
   use { "nvim-telescope/telescope-file-browser.nvim" }
 
+  use {
+    'nvim-lua/completion-nvim',
+    config = function()
+      require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+    end
+  }
+
+  -- lua require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+
+
   -- Startup page
   -- Link: https://github.com/startup-nvim/startup.nvim
   use {
@@ -44,4 +54,8 @@ return require('packer').startup(function(use)
   -- Colorschema
   use 'bluz71/vim-moonfly-colors'
   use 'folke/tokyonight.nvim'
+
+  -- Language highlight
+  use 'hashivim/vim-terraform'
+  use 'ekalinin/Dockerfile.vim'
 end)

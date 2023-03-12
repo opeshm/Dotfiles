@@ -1,9 +1,9 @@
-Config { font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true"
+Config { font = "Ubuntu bold 8"
        , additionalFonts = [ 
-           "xft:Mononoki Nerd Font:pixelsize=12:antialias=true:hinting=true",
-           "xft:Font Awesome 6 Free Solid:pixelsize=12",
-           "xft:Font Awesome 6 Brands:pixelsize=12",
-           "xft:PowerlineSymbols:pixelsize=12"
+           "Mononoki Nerd Font 12",
+           "Font Awesome 6 Free Solid 12",
+           "Font Awesome 6 Brands 12",
+           "PowerlineSymbols 12"
        ]
        , borderColor = "#282c34"
        , border = TopB

@@ -58,4 +58,7 @@ return require('packer').startup(function(use)
   -- Language highlight
   use 'hashivim/vim-terraform'
   use 'ekalinin/Dockerfile.vim'
+
+  -- Hex colors hightlight 
+  use 'ap/vim-css-color'
 end)

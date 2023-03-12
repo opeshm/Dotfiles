@@ -301,7 +301,6 @@ myKeys =
 
 main :: IO ()
 main = do
-    xmproc0 <- spawnPipe "xmobar"
     xmonad $ docks $ ewmh def
         { manageHook         = myManageHook <+> manageDocks
         , modMask            = myModMask
@@ -312,20 +311,4 @@ main = do
         , borderWidth        = myBorderWidth
         , normalBorderColor  = color02
         , focusedBorderColor = color03
-        , logHook = dynamicLogWithPP $ filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP
-            -- the following variables beginning with 'pp' are settings for xmobar.
-            { 
-                ppOutput = \x -> hPutStrLn xmproc0 x                          
-              , ppCurrent = xmobarColor color03 "" . wrap
-                ("<box type=Bottom width=2 mb=0 color=" ++ color03 ++ ">") "</box>"
-              , ppVisible = xmobarColor color02 "" . clickable
-              , ppHidden = xmobarColor color05 "" . wrap 
-                ("<box type=Top width=2 mb=0 color=" ++ color05 ++ ">") "</box>". clickable
-              , ppHiddenNoWindows = xmobarColor color14 ""  . clickable
-              , ppTitle = xmobarColor color03 "" . shorten 60
-              , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"
-              , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
-              , ppExtras  = [windowCount]
-              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-            }
         } `additionalKeysP` myKeys

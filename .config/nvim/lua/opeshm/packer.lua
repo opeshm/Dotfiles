@@ -31,15 +31,12 @@ return require('packer').startup(function(use)
   }
   use { "nvim-telescope/telescope-file-browser.nvim" }
 
-  use {
-    'nvim-lua/completion-nvim',
-    config = function()
-      require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
-    end
-  }
+  use { "neovim/nvim-lspconfig" }
 
-  -- lua require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
-
+  use { "ms-jpq/coq_nvim", branch = "coq"}
+  use { "ms-jpq/coq.artifacts", branch = "artifacts" }
+  use { "ms-jpq/coq_nvim", branch = "coq" }
+  use { "ms-jpq/coq.thirdparty", branch = "3p" }
 
   -- Startup page
   -- Link: https://github.com/startup-nvim/startup.nvim

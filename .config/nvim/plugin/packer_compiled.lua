@@ -79,11 +79,25 @@ _G.packer_plugins = {
     path = "/home/opes/.local/share/nvim/site/pack/packer/start/Dockerfile.vim",
     url = "https://github.com/ekalinin/Dockerfile.vim"
   },
-  ["completion-nvim"] = {
-    config = { "\27LJ\2\np\0\0\6\0\a\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0009\0\3\0005\2\6\0006\3\0\0'\5\4\0B\3\2\0029\3\5\3=\3\5\2B\0\2\1K\0\1\0\1\0\0\14on_attach\15completion\nsetup\tpyls\14lspconfig\frequire\0" },
+  ["coq.artifacts"] = {
     loaded = true,
-    path = "/home/opes/.local/share/nvim/site/pack/packer/start/completion-nvim",
-    url = "https://github.com/nvim-lua/completion-nvim"
+    path = "/home/opes/.local/share/nvim/site/pack/packer/start/coq.artifacts",
+    url = "https://github.com/ms-jpq/coq.artifacts"
+  },
+  ["coq.thirdparty"] = {
+    loaded = true,
+    path = "/home/opes/.local/share/nvim/site/pack/packer/start/coq.thirdparty",
+    url = "https://github.com/ms-jpq/coq.thirdparty"
+  },
+  coq_nvim = {
+    loaded = true,
+    path = "/home/opes/.local/share/nvim/site/pack/packer/start/coq_nvim",
+    url = "https://github.com/ms-jpq/coq_nvim"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/home/opes/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -154,10 +168,6 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: completion-nvim
-time([[Config for completion-nvim]], true)
-try_loadstring("\27LJ\2\np\0\0\6\0\a\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0009\0\3\0005\2\6\0006\3\0\0'\5\4\0B\3\2\0029\3\5\3=\3\5\2B\0\2\1K\0\1\0\1\0\0\14on_attach\15completion\nsetup\tpyls\14lspconfig\frequire\0", "config", "completion-nvim")
-time([[Config for completion-nvim]], false)
 -- Config for: startup.nvim
 time([[Config for startup.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstartup\frequire\0", "config", "startup.nvim")

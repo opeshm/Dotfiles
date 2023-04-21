@@ -25,3 +25,4 @@ vim.opt.hlsearch = true
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+

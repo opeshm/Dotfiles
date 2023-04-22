@@ -12,6 +12,7 @@ Now, you need to install all the lsp language servers
 ```
 npm install -g pyright
 npm install -g typescript-language-server typescript
+npm i -g bash-language-server
 ```
 
 ### Enable TypeScript language server

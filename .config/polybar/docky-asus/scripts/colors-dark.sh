@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # Color files
-PFILE="$HOME/.config/polybar/docky-custom/colors.ini"
-RFILE="$HOME/.config/polybar/docky-custom/scripts/rofi/colors.rasi"
+PFILE="$HOME/.config/polybar/docky-asus/colors.ini"
+RFILE="$HOME/.config/polybar/docky-asus/scripts/rofi/colors.rasi"
 
 # Change colors
 change_color() {
 	# polybar
-	sed -i -e 's/background = #.*/background = #FFFFFF/g' $PFILE
-	sed -i -e 's/foreground = #.*/foreground = #2E2E2E/g' $PFILE
-	sed -i -e 's/foreground-alt = #.*/foreground-alt = #656565/g' $PFILE
+	sed -i -e 's/background = #.*/background = #1F1F1F/g' $PFILE
+	sed -i -e 's/foreground = #.*/foreground = #FFFFFF/g' $PFILE
+	sed -i -e 's/foreground-alt = #.*/foreground-alt = #8F8F8F/g' $PFILE
 	sed -i -e "s/module-fg = #.*/module-fg = $MF/g" $PFILE
 	sed -i -e "s/primary = #.*/primary = $AC/g" $PFILE
 	sed -i -e 's/secondary = #.*/secondary = #E53935/g' $PFILE
@@ -21,10 +21,10 @@ change_color() {
 
 	* {
 	  al:   #00000000;
-	  bg:   #FFFFFFFF;
+	  bg:   #1F1F1FFF;
 	  bga:  ${AC}33;
 	  bar:  ${MF}FF;
-	  fg:   #2E2E2EFF;
+	  fg:   #FFFFFFFF;
 	  ac:   ${AC}FF;
 	}
 	EOF
@@ -33,7 +33,7 @@ change_color() {
 }
 
 if  [[ $1 = "--amber" ]]; then
-	MF="#2E2E2E"
+	MF="#1F1F1F"
 	AC="#ffb300"
 	change_color
 elif  [[ $1 = "--blue" ]]; then
@@ -49,7 +49,7 @@ elif  [[ $1 = "--brown" ]]; then
 	AC="#6d4c41"
 	change_color
 elif  [[ $1 = "--cyan" ]]; then
-	MF="#2E2E2E"
+	MF="#1F1F1F"
 	AC="#00acc1"
 	change_color
 elif  [[ $1 = "--deep-orange" ]]; then
@@ -73,19 +73,19 @@ elif  [[ $1 = "--indigo" ]]; then
 	AC="#3949ab"
 	change_color
 elif  [[ $1 = "--light-blue" ]]; then
-	MF="#2E2E2E"
+	MF="#1F1F1F"
 	AC="#039be5"
 	change_color
 elif  [[ $1 = "--light-green" ]]; then
-	MF="#2E2E2E"
+	MF="#1F1F1F"
 	AC="#7cb342"
 	change_color
 elif  [[ $1 = "--lime" ]]; then
-	MF="#2E2E2E"
+	MF="#1F1F1F"
 	AC="#c0ca33"
 	change_color
 elif  [[ $1 = "--orange" ]]; then
-	MF="#2E2E2E"
+	MF="#1F1F1F"
 	AC="#fb8c00"
 	change_color
 elif  [[ $1 = "--pink" ]]; then
@@ -105,7 +105,7 @@ elif  [[ $1 = "--teal" ]]; then
 	AC="#00897b"
 	change_color
 elif  [[ $1 = "--yellow" ]]; then
-	MF="#2E2E2E"
+	MF="#1F1F1F"
 	AC="#fdd835"
 	change_color
 else

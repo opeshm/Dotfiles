@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="$HOME/.config/polybar/docky"
+DIR="$HOME/.config/polybar/docky-asus"
 
 # Terminate already running bar instances
 killall -q polybar

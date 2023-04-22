@@ -4,11 +4,11 @@ dir="$HOME/.config/polybar"
 themes=(`ls --hide="launch.sh" $dir`)
 
 launch_bar() {
-	# Terminate already running bar instances
+    # Terminate already running bar instances
 	killall -q polybar
 
-	# Wait until the processes have been shut down
-	while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+    # Wait until the processes have been shut down
+    while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 	# Launch the bar
 	if [[ "$style" == "hack" || "$style" == "cuts" ]]; then
@@ -37,8 +37,17 @@ elif [[ "$1" == "--docky" ]]; then
 	style="docky"
 	launch_bar
 
-elif [[ "$1" == "--docky-custom" ]]; then
-	style="docky-custom"
+elif [[ "$1" == "--docky-asus" ]]; then
+	style="docky-asus"
+	launch_bar
+
+elif [[ "$1" == "--docky-alpha15" ]]; then
+	style="docky-alpha15"
+	launch_bar
+
+elif [[ "$1" == "--docky-alpha15-extended" ]]; then
+	style="docky-alpha15-extended"
+    kill_previous_bar="false"
 	launch_bar
 
 elif [[ "$1" == "--cuts" ]]; then
@@ -83,3 +92,5 @@ else
 	--panels    --pwidgets       --shades    --shapes
 	EOF
 fi
+
+kill_previous_bar="true"

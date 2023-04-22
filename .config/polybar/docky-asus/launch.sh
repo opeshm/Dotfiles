@@ -2,7 +2,7 @@
 
 # Add this script to your wm startup file.
 
-DIR="$HOME/.config/polybar/docky-custom"
+DIR="$HOME/.config/polybar/docky-asus"
 echo "hola"
 
 # Terminate already running bar instances

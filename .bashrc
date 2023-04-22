@@ -91,3 +91,7 @@ source $BASH_UTILS/bash-utils.sh
 HOME=${HOME:-'/home/opes'}
 export PATH="$HOME/"'.platformsh/bin':"$PATH"
 if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

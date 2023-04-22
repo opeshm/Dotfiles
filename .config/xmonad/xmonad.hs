@@ -103,7 +103,7 @@ myStartupHook = do
     spawnOnce "volumeicon &"
     spawnOnce "nm-applet &"
     setWMName "LG3D"
-    spawn "~/.config/polybar/launch-by-host.sh"
+    spawn "~/.config/wm-startup.sh"
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "ncspot" spawnNCSpot findNCSpot manageNCSpot

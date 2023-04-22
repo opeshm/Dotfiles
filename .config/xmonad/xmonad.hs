@@ -3,6 +3,7 @@
 
 -- Base
 import XMonad
+import Network.HostName
 import System.Directory
 import System.IO (hPutStrLn)
 import System.Exit (exitSuccess)
@@ -102,6 +103,7 @@ myStartupHook = do
     spawnOnce "volumeicon &"
     spawnOnce "nm-applet &"
     setWMName "LG3D"
+    spawn "~/.config/polybar/launch-by-host.sh"
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "ncspot" spawnNCSpot findNCSpot manageNCSpot

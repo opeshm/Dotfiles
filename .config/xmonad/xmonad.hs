@@ -3,7 +3,6 @@
 
 -- Base
 import XMonad
-import Network.HostName
 import System.Directory
 import System.IO (hPutStrLn)
 import System.Exit (exitSuccess)
@@ -103,7 +102,7 @@ myStartupHook = do
     spawnOnce "volumeicon &"
     spawnOnce "nm-applet &"
     setWMName "LG3D"
-    spawn "~/.config/wm-startup.sh"
+    spawnOnce "sleep 2 && . ~/.config/wm-startup.sh"
 
 myScratchPads :: [NamedScratchpad]
 myScratchPads = [ NS "ncspot" spawnNCSpot findNCSpot manageNCSpot

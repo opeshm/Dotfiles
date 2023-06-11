@@ -4,7 +4,6 @@ echo "Init wm-startup.sh..." >> /tmp/wm-startup.log
 # Check num monitors
 echo "Checkin num monitors..." >> /tmp/wm-startup.log
 MONITOR_COUNT=$(xrandr -q | grep " connected" | cut -d ' ' -f1 | wc -l)
-echo "${MONITOR_COUNT}" >> /tmp/wm-startup.log
 
 # Init Monitors
 if [[ "${MONITOR_COUNT}" == "2" ]]; then
@@ -15,6 +14,9 @@ fi
 
 # Polybar
 case "${HOSTNAME}" in
+    "nzxtarch")
+        . ~/.config/polybar/docky-nzxtarch/launch.sh
+        ;;
     "asusarch")
         . ~/.config/polybar/docky-asus/launch.sh
         ;;

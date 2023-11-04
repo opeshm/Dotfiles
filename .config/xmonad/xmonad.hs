@@ -98,7 +98,6 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "picom &"
     spawnOnce "nitrogen --restore &"
-    spawnOnce "stalonetray &"
     spawnOnce "volumeicon &"
     spawnOnce "nm-applet &"
     setWMName "LG3D"

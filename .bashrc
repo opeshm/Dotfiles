@@ -94,4 +94,6 @@ if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/she
 
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+if [ $(ng 2> /dev/null) ]; then
+  source <(ng completion script)
+fi

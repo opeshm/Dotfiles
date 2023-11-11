@@ -8,6 +8,15 @@ return require('packer').startup(function(use)
   -- Link: https://github.com/wbthomason/packer.nvim
   use 'wbthomason/packer.nvim'
 
+  -- Autocomplete
+  use { "ms-jpq/coq_nvim", branch = "coq"}
+  use { "ms-jpq/coq.artifacts", branch = "artifacts" }
+  use { "ms-jpq/coq_nvim", branch = "coq" }
+  use { "ms-jpq/coq.thirdparty", branch = "3p" }
+
+  -- LSP config
+  use { "neovim/nvim-lspconfig" }
+
   -- vim-ariline plugin
   -- Link: https://github.com/vim-airline/vim-airline
   use 'vim-airline/vim-airline'
@@ -26,17 +35,16 @@ return require('packer').startup(function(use)
   -- nvim-telescope: FuzzyFinder
   -- Link: https://github.com/nvim-telescope/telescope.nvim
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    'nvim-telescope/telescope.nvim', 
+    'branch': '0.1.x',
+    requires = { 
+      { "nvim-telescope/telescope-live-grep-args.nvim" },
+      {'nvim-lua/plenary.nvim'}
+    }
   }
   use { "nvim-telescope/telescope-file-browser.nvim" }
 
-  use { "neovim/nvim-lspconfig" }
-
-  use { "ms-jpq/coq_nvim", branch = "coq"}
-  use { "ms-jpq/coq.artifacts", branch = "artifacts" }
-  use { "ms-jpq/coq_nvim", branch = "coq" }
-  use { "ms-jpq/coq.thirdparty", branch = "3p" }
+  use { "folke/todo-comments.nvim"}
 
   -- Startup page
   -- Link: https://github.com/startup-nvim/startup.nvim
@@ -49,7 +57,6 @@ return require('packer').startup(function(use)
   }
 
   -- Colorschema
-  use 'bluz71/vim-moonfly-colors'
   use 'folke/tokyonight.nvim'
 
   -- Language highlight
@@ -58,4 +65,8 @@ return require('packer').startup(function(use)
 
   -- Hex colors hightlight 
   use 'ap/vim-css-color'
+  
+  -- Spellcheck
+  use 'itspriddle/vim-shellcheck'
+
 end)

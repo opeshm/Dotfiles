@@ -22,6 +22,10 @@ Enlaces a los proyectos de las dependencias:
   ```bash
   git clone https://gitlab.com/opeshm/bash-utils.git .config/bash-utils
   ```
+* Instalar mi propio utils para bash-utils
+  ```bash
+  git clone https://gitlab.com/opeshm/bu-custom-utils.git .config/bash-utils/utils/bu-custom-utils
+  ```
 
 ## Instalación
 

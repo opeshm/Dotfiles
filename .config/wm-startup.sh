@@ -1,6 +1,9 @@
 #!/bin/bash
 echo "Init wm-startup.sh..." >> /tmp/wm-startup.log
 
+# Caps lock 
+setxkbmap -option caps:swapescape
+
 # Check num monitors
 echo "Checkin num monitors..." >> /tmp/wm-startup.log
 MONITOR_COUNT=$(xrandr -q | grep " connected" | cut -d ' ' -f1 | wc -l)

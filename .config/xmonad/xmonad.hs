@@ -98,8 +98,8 @@ myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "picom &"
     spawnOnce "nitrogen --restore &"
-    spawnOnce "volumeicon &"
-    spawnOnce "nm-applet &"
+    spawnOnce "sleep 2 && nm-applet &"
+    spawnOnce "sleep 2 && volumeicon &"
     setWMName "LG3D"
     spawnOnce "sleep 2 && . ~/.config/wm-startup.sh"
 

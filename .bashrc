@@ -7,7 +7,7 @@ case $- in
 esac
 
 # Path to the bash it configuration
-export BASH_IT="/home/opes/.config/bash_it"
+export BASH_IT="${HOME}/.config/bash_it"
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
@@ -83,13 +83,6 @@ export SCM_CHECK=true
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
 
-export BASH_UTILS=/home/opes/.config/bash-utils
-
+export BASH_UTILS=${HOME}/.config/bash-utils
 source $BASH_UTILS/bash-utils.sh
-
-# BEGIN SNIPPET: Platform.sh CLI configuration
-HOME=${HOME:-'/home/opes'}
-export PATH="$HOME/"'.platformsh/bin':"$PATH"
-if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
-
 

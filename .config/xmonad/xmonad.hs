@@ -291,9 +291,9 @@ myKeys =
         , ("<XF86AudioPlay>", spawn (myTerminal ++ "mocp --play"))
         , ("<XF86AudioPrev>", spawn (myTerminal ++ "mocp --previous"))
         , ("<XF86AudioNext>", spawn (myTerminal ++ "mocp --next"))
-        , ("<XF86AudioMute>", spawn "amixer set Master toggle")
-        , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
-        , ("<XF86AudioRaiseVolume>", spawn "amixer set Master 5%+ unmute")
+        , ("<XF86AudioMute>", spawn "pamixer --toggle-mute")
+        , ("<XF86AudioLowerVolume>", spawn "pamixer -d 5")
+        , ("<XF86AudioRaiseVolume>", spawn "pamixer -i 5")
         ]
     -- The following lines are needed for named scratchpads.
           where nonNSP          = WSIs (return (\ws -> W.tag ws /= "NSP"))

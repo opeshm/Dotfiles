@@ -17,7 +17,7 @@ fi
 
 # Polybar
 case "${HOSTNAME}" in
-    "nzxtarch")
+    "nzxt")
         . ~/.config/polybar/docky-nzxtarch/launch.sh
         ;;
     "asusarch")

@@ -28,6 +28,9 @@ Enlaces a los proyectos de las dependencias:
   ```
 
 ## Instalación
+> DISCLAIMER: Este proceso es DESTRUCTIVO, es decir, si sigues todo este proceso, eliminaras
+cualquier customizacion modificacion de tu perfirl. Ejecuta esto solo bajo tu responsabilidad y
+sobre una instalacion limpia del sistema.
 
 * Primero clonamos el repositorio dentro de la carpeta .config del usuario:
   ```bash
@@ -47,6 +50,10 @@ Enlaces a los proyectos de las dependencias:
 * Actualizamos todos nuestros archivos locales
   ```bash
   config checkout .
+  ```
+* Instalamos los submodulos:
+  ```bash
+  config submodule update --init --recursive --remote
   ```
 
 # Enlaces de interes

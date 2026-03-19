@@ -1,6 +1,6 @@
 # DotFiles
 
-Proyecto para la gestión de mis dotfiles.
+Repositorio para gestionar mis dotfiles usando GNU Stow.
 
 # Instrucciones
 
@@ -13,59 +13,75 @@ Enlaces a los proyectos de las dependencias:
 - [github ryanoasis/Nerd Fonts](https://github.com/ryanoasis/nerd-fonts)
 - [SpaceVim](https://spacevim.org/)
 
-### Instalación de dependencias obligatorias
-* Instalar bash-it
+Dependencias base para instalar los dotfiles:
+- `git`
+- `stow`
+
+### Instalacion de dependencias obligatorias
+- Instalar bash-it:
   ```bash
-  git clone https://github.com/bash-it/bash-it.git .config/bash_it
+  ./scripts/bootstrap-bash-it.sh
   ```
-* Instalar bash-utils
+- Instalar bash-utils:
   ```bash
-  git clone https://gitlab.com/opeshm/bash-utils.git .config/bash-utils
+  ./scripts/bootstrap-bash-utils.sh
   ```
-* Instalar mi propio utils para bash-utils
+- Instalar mis utilidades para bash-utils:
   ```bash
-  git clone https://gitlab.com/opeshm/bu-custom-utils.git .config/bash-utils/utils/bu-custom-utils
+  git clone https://gitlab.com/opeshm/bu-custom-utils.git ~/.local/share/bash-utils/utils/bu-custom-utils
   ```
 
-## Instalación
-> DISCLAIMER: Este proceso es DESTRUCTIVO, es decir, si sigues todo este proceso, eliminaras
-cualquier customizacion modificacion de tu perfirl. Ejecuta esto solo bajo tu responsabilidad y
-sobre una instalacion limpia del sistema.
+Opcionalmente puedes fijar una version concreta de `bash-utils`:
+```bash
+BASH_UTILS_REF=v1.2.3 ./scripts/bootstrap-bash-utils.sh
+```
 
-* Primero clonamos el repositorio dentro de la carpeta .config del usuario:
-  ```bash
-  git clone --bare https://gitlab.com/opeshm/dotfiles ~/.config/dotfiles
-  ```
-  > Importante usar la opcion --bare del clone.
+Opcionalmente puedes fijar una version concreta de `bash-it`:
+```bash
+BASH_IT_REF=v3.0.1 ./scripts/bootstrap-bash-it.sh
+```
 
-* Creamos un alias termporal para trabajar con el repositorio
-  ```bash
-  alias config='/usr/bin/git --git-dir=$HOME/.config/dotfiles/ --work-tree=$HOME'
-  ```
+## Instalacion con GNU Stow
 
-* Hacemos un reset del repo para que descarte posibles conflictos entre los archivos actuales y los del repositorio.
-  ```bash
-  config reset --hard
-  ```
-* Actualizamos todos nuestros archivos locales
-  ```bash
-  config checkout .
-  ```
-* Instalamos los submodulos:
-  ```bash
-  config submodule update --init --recursive --remote
-  ```
+1. Clona el repositorio:
+   ```bash
+   git clone --recurse-submodules git@gitlab.com:opeshm/dotfiles.git ~/.dotfiles
+   ```
+
+2. Entra al repo:
+   ```bash
+   cd ~/.dotfiles
+   ```
+
+3. Instala o actualiza submodulos:
+   ```bash
+   git submodule update --init --recursive --remote
+   ```
+
+4. Crea symlinks en tu `$HOME` para todos los paquetes:
+   ```bash
+   stow --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen nvim picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
+   ```
+
+Si prefieres aplicar solo algunos paquetes, pasa solo esos nombres a `stow`.
+
+### Desinstalar symlinks
+
+Para quitar los enlaces creados por stow:
+```bash
+stow -D --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen nvim picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
+```
 
 # Enlaces de interes
 
 - [Arch Linux wiki - Dotfiles](https://wiki.archlinux.org/title/Dotfiles)
 
-# Kown Issues
+# Known issues
 
 ## setlocale: LC_ALL
 `-bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory`
-Por lo general, este error sale en los WSL. Para corregirlo, solo ejecutar la reconfiguración del packet locales
-y seguir las instrucciones
+
+Por lo general, este error aparece en WSL. Para corregirlo, ejecuta la reconfiguracion de locales y sigue el asistente:
 ```bash
 sudo dpkg-reconfigure locales
 ```

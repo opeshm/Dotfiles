@@ -7,7 +7,7 @@ case $- in
 esac
 
 # Path to the bash it configuration
-export BASH_IT="${HOME}/.config/bash_it"
+export BASH_IT="${XDG_DATA_HOME:-$HOME/.local/share}/bash-it"
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
@@ -81,8 +81,13 @@ export SCM_CHECK=true
 # export BASH_IT_RELOAD_LEGACY=1
 
 # Load Bash It
-source "$BASH_IT"/bash_it.sh
+if [ -d "$BASH_IT" ]; then
+  source "$BASH_IT"/bash_it.sh
+fi
 
-export BASH_UTILS=${HOME}/.config/bash-utils
-source $BASH_UTILS/bash-utils.sh
+export BASH_UTILS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/bash-utils"
+if [ -f "$BASH_UTILS_DIR/bash-utils.sh" ]; then
+  source "$BASH_UTILS_DIR/bash-utils.sh"
+fi
 
+export PATH=/home/opes/.opencode/bin:$PATH

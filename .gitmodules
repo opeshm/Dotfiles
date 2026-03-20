@@ -1,3 +1,0 @@
-[submodule "nvim/.config/nvim"]
-	path = nvim/.config/nvim
-	url = git@gitlab.com:opeshm/dotfiles-nvim-config.git

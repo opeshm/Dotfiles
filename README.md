@@ -45,7 +45,7 @@ BASH_IT_REF=v3.0.1 ./scripts/bootstrap-bash-it.sh
 
 1. Clona el repositorio:
    ```bash
-   git clone --recurse-submodules git@gitlab.com:opeshm/dotfiles.git ~/.dotfiles
+   git clone git@gitlab.com:opeshm/dotfiles.git ~/.dotfiles
    ```
 
 2. Entra al repo:
@@ -53,15 +53,26 @@ BASH_IT_REF=v3.0.1 ./scripts/bootstrap-bash-it.sh
    cd ~/.dotfiles
    ```
 
-3. Instala o actualiza submodulos:
-   ```bash
-   git submodule update --init --recursive --remote
-   ```
+3. Instala dependencias:
+   - bash-it:
+     ```bash
+     ./scripts/bootstrap-bash-it.sh
+     ```
+   - bash-utils:
+     ```bash
+     ./scripts/bootstrap-bash-utils.sh
+     ```
+   - configuración de Neovim:
+     ```bash
+     ./scripts/bootstrap-nvim.sh
+     ```
+     Puedes fijar una versión concreta con `NVIM_CONFIG_REF=v1.2.3`.
 
 4. Crea symlinks en tu `$HOME` para todos los paquetes:
    ```bash
-   stow --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen nvim picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
+   stow --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
    ```
+   Nota: `nvim` no se instala con stow, ya que su configuración se clona directamente en `~/.config/nvim`.
 
 Si prefieres aplicar solo algunos paquetes, pasa solo esos nombres a `stow`.
 
@@ -69,7 +80,7 @@ Si prefieres aplicar solo algunos paquetes, pasa solo esos nombres a `stow`.
 
 Para quitar los enlaces creados por stow:
 ```bash
-stow -D --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen nvim picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
+stow -D --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
 ```
 
 # Enlaces de interes

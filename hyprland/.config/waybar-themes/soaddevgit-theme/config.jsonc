@@ -23,6 +23,7 @@
     "idle_inhibitor",
     "pulseaudio_slider",
     "pulseaudio",
+    "backlight",
     "network",
     "battery",
     "hyprland/language"
@@ -111,6 +112,15 @@
         ""
       ]
     }
+  },
+  "backlight": {
+    "format": "{percent}% {icon}",
+    "format-icons": [
+      "󰃞",
+      "󰃟",
+      "󰃠"
+    ],
+    "tooltip-format": "Brightness: {percent}%"
   },
   "network": {
     "format": "{ifname}",

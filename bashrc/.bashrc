@@ -91,3 +91,10 @@ if [ -f "$BASH_UTILS_DIR/bash-utils.sh" ]; then
 fi
 
 export PATH=/home/opes/.opencode/bin:$PATH
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+# OpenClaw Completion
+OPENCLAW_COMPRETION_PATH="/home/opes/.openclaw/completions/openclaw.bash"
+if [ -f $OPENCLAW_COMPRETION_PATH ]; then
+  source $OPENCLAW_COMPRETION_PATH
+fi

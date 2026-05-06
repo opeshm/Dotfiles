@@ -63,7 +63,8 @@
     "tooltip-format": "Temperatura actual: {temperatureC}°C\nCrítico si > 80°C",
     "format-icons": [
       ""
-    ]
+    ],
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input"
   },
   /* === Modules Center === */
   "hyprland/workspaces": {

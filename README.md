@@ -70,7 +70,7 @@ BASH_IT_REF=v3.0.1 ./scripts/bootstrap-bash-it.sh
 
 4. Crea symlinks en tu `$HOME` para todos los paquetes:
    ```bash
-   stow --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
+   stow --target="$HOME" alacritty bashrc conky ghostty hyprland i3 nitrogen picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
    ```
    Nota: `nvim` no se instala con stow, ya que su configuración se clona directamente en `~/.config/nvim`.
 
@@ -80,7 +80,7 @@ Si prefieres aplicar solo algunos paquetes, pasa solo esos nombres a `stow`.
 
 Para quitar los enlaces creados por stow:
 ```bash
-stow -D --target="$HOME" alacritty bashrc conky hyprland i3 nitrogen picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
+stow -D --target="$HOME" alacritty bashrc conky ghostty hyprland i3 nitrogen picom polybar rofi stalonetray tmux wm-startup xmobar xmonad
 ```
 
 # Enlaces de interes
